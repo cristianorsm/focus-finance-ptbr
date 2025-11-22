@@ -1,13 +1,16 @@
 // src/lib/supabaseClient.ts
 import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error(
-    "⚠️ Variáveis de ambiente do Supabase não definidas. Verifique o arquivo .env"
+  console.error(
+    "[Supabase] Variáveis de ambiente faltando. Verifique VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY na Vercel."
   );
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = createClient(
+  supabaseUrl as string,
+  supabaseAnonKey as string
+);
